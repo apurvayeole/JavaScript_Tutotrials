@@ -4,22 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="products"  style="border: 2px solid; padding: 2px;">
-        <h2>Products</h2>
-        <div id="product" style="border: 0.5px solid blue;">
-            <div id="product-name">Product A</div>
-            <p id="price" value="30">30</p>
-        </div>
-        <p >Quantity : </p>
-        <input type="number" id="quantity">
-        <button id="cart-btn">Add to cart</button>
+    <div id="layout">
+    <div id="product-container"></div>
+    <div id="bill">
+        <div id="total"></div>
     </div>
-    <div class="bill">
-        <h2>Bill</h2>
-        <div id="items"></div>
-
     </div>
     <script src="main.js"></script>
 </body>

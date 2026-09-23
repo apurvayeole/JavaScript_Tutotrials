@@ -1,52 +1,83 @@
-const Price = document.querySelector("#price");
-const Quantity = document.querySelector("#quantity");
+let products = [
+    {
+        id:1,
+        name:"ShoesA",
+        price: 4000
+    },
 
-const CartBtn = document.querySelector("#cart-btn");
+    {
+        id:2,
+        name:"ShoesB",
+        price: 4500
+    },
 
-const Items = document.querySelector("#items");
+    {
+        id:3,
+        name:"ShoesC",
+        price: 3500
+    },
 
-const ProductName = document.querySelector("#product-name");
-function validate(quantity){
-    console.log("4");
-    if(quantity >= 1){
-        return true;
-    }else{
-        throw new Error ("Enter valid quantity!");
-    }
+    {
+        id:4,
+        name:"ShoesD",
+        price: 5430
+    },
+
+    {
+        id:5,
+        name:"ShoesE",
+        price: 4330
+    },
+]
+
+
+let arr = [];
+const productContainer = document.querySelector("#product-container");
+function render(){
+    // productContainer.innerHTML = "";
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.innerHTML = `
+        <h3>${product.name}<h3>
+        <p>${product.price}<p>
+        <button data-id=${product.id}
+        data-name="${product.name}" 
+        data-price=${product.price}> Add to cart </button>
+        `;
+
+        productContainer.appendChild(productCard);
+        
+    })
 }
-function total(price, quantity){
-    try{
-    
-    validate(quantity);
-    console.log(price);
-    console.log(quantity);
-    console.log(price*quantity);
-    return price*quantity;
-    }catch(err){
-        console.log("Error : " + err.message);
-    }
-}
+ render();
 
-CartBtn.addEventListener("click", (event) =>{
-    console.log("1");
-    const cost = total(Price.textContent, Quantity.value);
-    console.log("2");
-    const item = document.createElement("div");
-    const proName = document.createElement("p");
-    const proQuantity = document.createElement("p");
-    const proTotalCost = document.createElement("p");
-
-    proTotalCost.textContent = cost;
-    proName.textContent = ProductName.textContent;
-    proQuantity.textContent = Quantity.value;
-
-    console.log("3");
-    Items.appendChild(item);
-    item.appendChild(proName);
-    item.appendChild(proQuantity);
-    item.appendChild(proTotalCost);
-    console.log("6");
-
+ const addButtons = document.querySelectorAll("#product-container button");
+        addButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+        const id = e.target.dataset.id;
+        if(!arr.includes(Number(id))){
+        const billContainer = document.querySelector('#bill');
+            const productCart = document.createElement('div');
+            productCart.id = `product-${id}`;
+            productCart.innerHTML = `
+            <h3>${e.target.dataset.name}</h3>
+            <p>${e.target.dataset.price}</p>
+            <p>quantity : 
+            <span class="qty">0</span> 
+            </p>
+            `
+            billContainer.appendChild(productCart);
+            arr.push(Number(id));
+        }else{
+            const quantity = document.querySelector(`#product-${id} .qty`);
+            quantity.textContent = Number(quantity.textContent) + 1;
+            console.log(quantity.textContent);
+        }
+            console.log(e.target.dataset.name);
+            console.log(e.target.dataset.price);
+            
+        console.log("Button click" , id); 
+    })
 })
 
 
