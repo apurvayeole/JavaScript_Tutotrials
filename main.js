@@ -50,7 +50,7 @@ function render(){
     })
 }
  render();
-
+let recentTotal = 0;
  const addButtons = document.querySelectorAll("#product-container button");
         addButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -63,21 +63,32 @@ function render(){
             <h3>${e.target.dataset.name}</h3>
             <p>${e.target.dataset.price}</p>
             <p>quantity : 
-            <span class="qty">0</span> 
+            <span class="qty">1</span> 
             </p>
             `
             billContainer.appendChild(productCart);
             arr.push(Number(id));
+
+            recentTotal = calculateTotal(Number(1),e.target.dataset.price, recentTotal);
+            console.log(recentTotal);
+
         }else{
             const quantity = document.querySelector(`#product-${id} .qty`);
             quantity.textContent = Number(quantity.textContent) + 1;
-            console.log(quantity.textContent);
+            // console.log(quantity.textContent);
+            recentTotal = calculateTotal(Number(quantity.textContent),e.target.dataset.price, recentTotal);
+            console.log(recentTotal);
         }
             console.log(e.target.dataset.name);
             console.log(e.target.dataset.price);
-            
-        console.log("Button click" , id); 
+ 
     })
 })
 
+function calculateTotal(price, qty, recentTotal){
+    console.log(price, qty);
+    recentTotal += price*qty;
+    console.log(recentTotal);
+    return recentTotal
+}
 
