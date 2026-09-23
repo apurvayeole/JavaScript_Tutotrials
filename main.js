@@ -76,11 +76,13 @@ let recentTotal = 0;
             const quantity = document.querySelector(`#product-${id} .qty`);
             quantity.textContent = Number(quantity.textContent) + 1;
             // console.log(quantity.textContent);
-            recentTotal = calculateTotal(Number(quantity.textContent),e.target.dataset.price, recentTotal);
+            recentTotal = calculateTotal(1,e.target.dataset.price, recentTotal);
             console.log(recentTotal);
         }
-            console.log(e.target.dataset.name);
-            console.log(e.target.dataset.price);
+        
+            const totalAmtDigit = document.querySelector("#totalAmtDigit");
+            totalAmtDigit.textContent =  recentTotal;
+        
  
     })
 })
